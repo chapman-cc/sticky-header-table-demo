@@ -11,42 +11,35 @@ interface FormSchema {
 type a = React.JSX.IntrinsicElements["input"];
 
 export default function Form() {
-  const { control, watch } = useForm<FormSchema>();
+  const { control, watch, register } = useForm<FormSchema>();
   const idForNative = useId();
 
-  if (false)
-    // toggle here
-
+  // toggle here
+  if (true) {
     return (
       <div>
         <h4>Value: {String(watch("isMarried"))}</h4>
+
+        <h5>Plain JSX form: </h5>
         <form>
-          <Controller
-            control={control}
-            name="isMarried"
-            render={({ field: { name, value, onChange, ref, onBlur } }) => (
-              <div className="flex gap-4">
-                <input
-                  type="checkbox"
-                  name={name}
-                  id={idForNative}
-                  checked={value}
-                  onChange={onChange}
-                  ref={ref}
-                />
-                <label htmlFor={idForNative}>Are you married?</label>
-              </div>
-            )}
-          />
+          <div className="flex gap-4">
+            <input type="checkbox" {...register("isMarried")} />
+            <label htmlFor={idForNative}>Are you married?</label>
+          </div>
 
           <Button>Submit</Button>
         </form>
       </div>
     );
+  }
 
   return (
     <div>
       <h4>Value: {String(watch("isMarried"))}</h4>
+
+      <h5>
+        Form with <span className="font-bold">Compass UI</span> elements:{" "}
+      </h5>
       <form>
         <Controller
           control={control}
